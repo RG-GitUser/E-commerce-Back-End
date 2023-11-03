@@ -1,3 +1,4 @@
+const express = require('express');
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
@@ -31,9 +32,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
-  // create a new category
+// create new category
+
+router.post('/categories', async (req, res) => {
+  try {
+    const { category_name } = req.body;
+    if (!category_name) {
+      return res.status(400).json({ error: 'Category name is required '});
+    }
+
+    const newCategory = await Category.create({ category_name });
+    res.status(201).json(newCategory);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error '});
+  }
 });
+
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
