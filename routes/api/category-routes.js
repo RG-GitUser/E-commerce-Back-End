@@ -18,14 +18,14 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const categoryId = req.params.id;
-    const category = await Category.findByPk(categoryId, {
+    const category = await Category.findByPk(categoryId, { // trying to find category id by primary key 
       include: Product, 
     });
     if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: 'Category not found' }); // if not found return a 404 status
     }
     res.json(category);
-  } catch (error) {
+  } catch (error) {             // sending category from database as a JSON response and log errors to user
     console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
