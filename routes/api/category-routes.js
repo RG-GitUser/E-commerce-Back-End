@@ -5,19 +5,30 @@ const { Category, Product } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
-    const categories = await Category.findAll({
-      include: Product, 
+    const categories = await Category.findAll({ 
+      include: Product,  // setting a route to find all categories 
     });
     res.json(categories);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Server error' });   // our response here will "catch" our response and return an error if our connection is unsuccessful
   }
 });
 
-router.get('/:id', (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
+router.get('/:id', async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const category = await Category.findByPk(categoryId, {
+      include: Product, 
+    });
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+    res.json(category);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 router.post('/', (req, res) => {
