@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {   // here we are sending a GET request
         {
           model: Category,
           attributes: ['id', 'category_name'],
-        },
+        },                                          // looking up product in database 
         {
           model: Tag,
           attributes: ['id', 'tag_name'],
@@ -45,26 +45,62 @@ router.get('/:id', async (req, res) => {   // here we are sending a GET request
     });
 
     if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+      return res.status(404).json({ error: 'Product not found' }); // if not found produce error message
     }
 
     res.json(product);
   } catch (error) {
-    console.error(error);
+    console.error(error);                                                 // if found return product information 
     res.status(500).json({ error: 'Failed to retrieve product' });
-  }
+  }  // send a 500 internal server error with error message 
 });
 
 // create new product
 router.post('/', (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
+
+// creating product basketball 
+  Product.create({
+    product_name: "Basketball",
+    price: 20.00,
+    stock: 3,
+    tagIds: [35, 53]
+  })
+    .then(product => {
+      res.json(product);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+
+    // creating product Gravy Boat
+  Product.create({
+    product_name: "Gravy Boat",
+    price: 35000.00,
+    stock: 1,
+    tagIds: [15, 13]
+  })
+    .then(product => {
+      res.json(product);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+
+    // creating product hamster 
+
+    Product.create({
+      product_name: "Hamster",
+      price: 550.00,
+      stock: 10,
+      tagIds: [20, 4]
+    })
+      .then(product => {
+        res.json(product);
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
