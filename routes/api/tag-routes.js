@@ -42,9 +42,14 @@ router.get('/:id', async (req, res) => {
 });
 
 
-
-router.post('/', (req, res) => {
-  // create a new tag
+// creating new tag 
+router.post('/', async (req, res) => {
+  try {
+    const tagData = await Tag.create(req.body);
+    res.status(201).json(tagData); // sucessful tag creation 
+  } catch (err) {
+    res.status(500).json(err); // unsuccessful tag creation with error msg 
+  }
 });
 
 router.put('/:id', (req, res) => {
