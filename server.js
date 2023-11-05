@@ -1,20 +1,10 @@
 const express = require('express');
 const routes = require('./routes');
-const { Sequelize } = require('sequelize');
-require('dotenv').config(); // Load environment variables from .env file
+const { sequelize } = require('./config/connection');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
-// Configure Sequelize with environment variables
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PW, {
-    dialect: process.env.DB_DIALECT,
-    host: process.env.DB_HOST,
-  }
-);
 
 // Sync Sequelize models with the database
 sequelize.sync()
