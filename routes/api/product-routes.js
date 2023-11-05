@@ -23,7 +23,8 @@ router.get('/', async (req, res) => {
     res.json(products);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to retrieve products' });
+    // res.status(500).json({ error: 'Failed to retrieve products' });
+    res.status(500).json(error.message);
   }
 });
 
