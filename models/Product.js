@@ -19,6 +19,13 @@ Product.init(
       type: DataTypes.DECIMAL(10, 2), // here we are setting our decimal point to stay only two decimals after the total number of digits, which in this case is 10. 
       allowNull: false, 
     },
+    category_id: { // adding category_id to reference to products
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Category',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,
