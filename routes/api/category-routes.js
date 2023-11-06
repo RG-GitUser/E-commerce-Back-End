@@ -9,6 +9,8 @@ router.get('/', async (req, res) => {
     const categories = await Category.findAll({ 
       include: Product,  // setting a route to find all categories 
     });
+    console.log(categories);
+    
     res.json(categories);
   } catch (error) {
     console.error(error);
@@ -34,7 +36,7 @@ router.get('/:id', async (req, res) => {
 
 // create new category
 
-router.post('/categories', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { category_name } = req.body;
     if (!category_name) { // seeing if the category_name is in the request
