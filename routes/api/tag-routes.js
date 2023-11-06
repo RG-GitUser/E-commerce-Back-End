@@ -37,7 +37,7 @@ router.get('/:id', async (req, res) => {
 
     res.status(200).json(tagData);
   } catch (err) {             // status 200 code is given for a successful response
-    res.status(500).json(err); // internal server error
+    res.status(500).json(error.message); // internal server error
   }
 });
 
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     const tagData = await Tag.create(req.body);
     res.status(201).json(tagData); // sucessful tag creation 
   } catch (err) {
-    res.status(500).json(err); // unsuccessful tag creation with error msg 
+    res.status(500).json(error.message); // unsuccessful tag creation with error msg 
   }
 });
 
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => { // PUT route param id to find tags
 
     res.status(200).json(tagData); 
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(error.message);
   }
 });
 
@@ -84,7 +84,7 @@ router.delete('/:id', async (req, res) => {
 
     res.status(204).end(); //success message
   } catch (err) {
-    res.status(500).json(err); //error message
+    res.status(error.message).json(err); //error message
   }
 });
 module.exports = router;

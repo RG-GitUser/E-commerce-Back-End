@@ -70,7 +70,7 @@ router.post('/', (req, res) => {
       res.json(product);
     })
     .catch(err => {
-      res.status(500).json(err);
+      res.status(500).json(error.message);
     });
 
     // creating product Gravy Boat
@@ -84,7 +84,7 @@ router.post('/', (req, res) => {
       res.json(product);
     })
     .catch(err => {
-      res.status(500).json(err);
+      res.status(500).json(error.message);
     });
 
     // creating product hamster 
@@ -99,7 +99,7 @@ router.post('/', (req, res) => {
         res.json(product);
       })
       .catch(err => {
-        res.status(500).json(err);
+        res.status(500).json(error.message);
       });
   
   Product.create(req.body)
