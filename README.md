@@ -1,4 +1,4 @@
-# E-commerce Back End Starter Code# E-commerce-Back-End
+# E-commerce-Back-End
 
 ## Description
 In this project, I have created a back-end database containing the proper code to deploy GET, POST and DELETE requests in insomnia. 
