@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-
+const ProductTag = require('./ProductTag');
 const sequelize = require('../config/connection.js');
 
 class Tag extends Model {}
@@ -13,9 +13,7 @@ Tag.init(
     },
     tag_name: {
       type: DataTypes.STRING, // set the tag_name to string so that we can return product names from the database. 
-      allowNull: false,
     },
-
   },
   {
     sequelize,
